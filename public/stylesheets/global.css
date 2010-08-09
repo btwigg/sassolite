@@ -1,0 +1,72 @@
+/*common css*/
+
+body {font:12px Arial; margin:20px 0; background:#f9aec2 url(../images/back2.jpg) top repeat-x;}
+p {font-size:1em; margin-bottom:15px; line-height:1.4em; color:#602800;}
+
+#border {width:960px; margin:0 auto; padding:8px 8px 0; background:#fff; overflow:hidden;}
+#back_shadow {width:980px; margin:0 auto; background:url(../../../images/back_shadow.png) top center repeat-y;}
+
+/*tabs*/
+#tabsWrap {width:960px; margin:0 auto -10px; overflow:hidden;}
+#tabsWrap ul {list-style-type:none; float:right; margin-right:20px;}
+#tabsWrap li {width:100px; float:left; margin:0 0 0 5px;}
+#tabsWrap li a {width:100px; float:left; text-align:center; background:#602800; padding:6px 0; font:bold 1em Arial; color:#fff; text-decoration:none;
+-moz-border-radius-topleft:6px; -webkit-border-top-left-radius:6px;
+-moz-border-radius-topright:6px; -webkit-border-top-right-radius:6px;}
+#tabsWrap li a:hover {background:#e75890; color:#fff;}
+#tabsWrap .city {font:italic .9em Arial; float:right; margin:6px 2px -10px 0;}
+
+/*header*/
+#header {position:relative; width:960px; height:100px; margin:0 auto 0;}
+#header .logo {position:absolute; top:16px; left:20px;}
+
+/*mainnav*/
+#mainnav {width:960px; margin:0 auto; background:url(../images/navback.jpg);}
+
+.jqueryslidemenu{font:15px Arial;width:100%; margin-left:20px;}
+.jqueryslidemenu ul{list-style-type:none;margin:0;padding:0;}
+.jqueryslidemenu ul li{position:relative;display:inline;float:left; z-index:1;}
+.jqueryslidemenu ul li a{display:block;color:#333;text-decoration:none; letter-spacing:.01em; text-transform:uppercase; padding:10px 10px;}
+	*html .jqueryslidemenu ul li a{display:inline-block;}
+.jqueryslidemenu ul li a:link,.jqueryslidemenu ul li a:visited{color:#602800;}
+.jqueryslidemenu ul li a:hover{color:#602800; background:url(../images/navback_over.jpg) top left repeat-x;}
+.jqueryslidemenu ul li ul{position:absolute;left:0;display:block;visibility:hidden;}
+.jqueryslidemenu ul li ul li{display:list-item;float:left;}
+.jqueryslidemenu ul li ul li ul{top:0;}
+.jqueryslidemenu ul li ul li a{font:13px Arial;width:160px;background:#000; margin:0;padding:5px;}
+.jqueryslidemenuz ul li ul li a:hover{background:#602800;color:#000;}
+/*.downarrowclass{position:absolute;top:12px;right:7px;}
+.rightarrowclass{position:absolute;top:6px;right:5px;}*/
+
+/*stage*/
+#stageWrap {width:960px; height:325px; margin:0 auto;
+-moz-border-radius:;
+-webkit-border-radius:;}
+
+/*stage*/
+#galleryWrap {position:relative; width:960px; height:135px; background:#fff; margin:0 auto; overflow:hidden;}
+#galleryWrap .aarow {position:absolute; top:0; left:0;}
+#galleryWrap ul {list-style-type:none; float:right; margin-right:3px; padding:12px 12px 0 0;}
+#galleryWrap li {float:left; margin:0 0 0 12px;}
+
+/*content*/
+#content {position:relative; width:980px; margin:0 auto; background: url(../images/contentBack.png) repeat-y; overflow:hidden;}
+#contentTop {width:980px; height:20px; margin:0 auto; background:url(../images/contentBackTop.png) no-repeat;}
+#contentBottom{width:980px; height:20px; margin:0 auto; background:url(../images/contentBackBottom.png) no-repeat;}
+
+#leftcol {float:left; width:500px; padding:5px 20px 20px 40px;}
+#leftcol h1 {font:2em Georgia; color:#602800; margin-bottom:10px;}
+#leftcol h2 {font-weight:bold; color:#699; margin-bottom:10px;}
+
+#rightcol {float:left; margin-left:20px; padding:10px 0 20px 0; width:400px; overflow:hidden;}
+#rightcol p {font-size:.9em; margin-bottom:8px; line-height:1.3em;}
+#rightcol h1 {font:1.5em Arial; color:#602800; margin-bottom:5px;}
+#rightcol .entry {padding-top:8px; border-top:1px solid #ffc9d6;}
+
+#news {float:left; width:170px; margin-right:20px;}
+#events {float:left; width:170px;}
+
+#bottomAd {padding:20px 0 10px; background:url(../images/shadow.jpg) top center no-repeat; text-align:center; clear:both;}
+
+/*footer*/
+#footer {width:960px; height:160px; margin:0 auto; background:#000; overflow:hidden;}

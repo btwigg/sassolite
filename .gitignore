@@ -1,0 +1,11 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+tmp/**
+config/database.yml
+.rsync_cache
+.DS_Store
+coverage/*
+coverage.data
+public/system

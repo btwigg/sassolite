@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %title Sassolite
+
+    = stylesheet_link_tag "screen", :media => "screen, projection"
+    = stylesheet_link_tag "print", :media => "print"
+
+    /[if lt IE 8]
+      = stylesheet_link_tag "ie", :media => "screen, projection"
+    
+    = stylesheet_link_tag "smoothness/jquery-ui-1.8.2.custom.css", :media => "screen, projection"
+    = stylesheet_link_tag "jquery.timemachine", :media => "screen, projection"
+    = stylesheet_link_tag "jquery.lightbox-0.5", :media => "screen, projection"
+    = stylesheet_link_tag "application", :media => "screen, projection"
+    
+    = javascript_include_tag "jquery.js", :cache => false
+    = javascript_include_tag "rails.js", :cache => false
+    = javascript_include_tag "jquery-ui-1.8.2.custom.min.js", :cache => false
+    = javascript_include_tag "jquery.timemachine-1.0.0.min.js", :cache => false
+    = javascript_include_tag "jquery.lightbox-0.5.js", :cache => false
+    
+    = csrf_meta_tag
+%body
+  .container
+    
+    .span-24
+      -# Flash messages
+      - if flash[:error]
+        .error= flash[:error]
+      - if flash[:notice]
+        .success= flash[:notice]
+      
+      -# Body content
+      = yield
