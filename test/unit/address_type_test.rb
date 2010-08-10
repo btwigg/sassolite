@@ -1,13 +1,12 @@
 require 'test_helper'
 
-class ClientTest < ActiveSupport::TestCase
+class AddressTypeTest < ActiveSupport::TestCase
   
-  context "A Client" do
+  context "An AddressType" do
     setup do
-      @client = Factory.create(:client)
+      @address_type = Factory.create(:address_type)
     end
     
-    should have_many :projects
     should have_many :addresses
     
     should validate_presence_of :name

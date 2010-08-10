@@ -1,5 +1,4 @@
-class Client < ActiveRecord::Base
-  has_many :projects
+class AddressType < ActiveRecord::Base
   has_many :addresses
   
   validates :name, :presence => true, :uniqueness => true
