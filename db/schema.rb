@@ -40,20 +40,6 @@ ActiveRecord::Schema.define(:version => 20100810192143) do
   add_index "addresses", ["address_type_id"], :name => "index_addresses_on_address_type_id"
   add_index "addresses", ["client_id"], :name => "index_addresses_on_client_id"
 
-  create_table "categories", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "cities", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cities", ["name"], :name => "index_cities_on_name"
-
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -61,50 +47,6 @@ ActiveRecord::Schema.define(:version => 20100810192143) do
   end
 
   add_index "clients", ["name"], :name => "index_clients_on_name"
-
-  create_table "event_pictures", :force => true do |t|
-    t.integer  "event_id"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "events", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.date     "date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "city_id"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.string   "contact_name"
-    t.string   "contact_phone"
-    t.string   "contact_email"
-    t.string   "album"
-    t.text     "location"
-  end
-
-  add_index "events", ["city_id"], :name => "index_events_on_city_id"
-
-  create_table "living_entries", :force => true do |t|
-    t.integer  "category_id"
-    t.text     "content"
-    t.string   "link"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pages", :force => true do |t|
-    t.string   "name"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "project_types", :force => true do |t|
     t.string   "name"
@@ -131,16 +73,6 @@ ActiveRecord::Schema.define(:version => 20100810192143) do
   add_index "projects", ["project_manager_id"], :name => "index_projects_on_project_manager_id"
   add_index "projects", ["project_type_id"], :name => "index_projects_on_project_type_id"
   add_index "projects", ["state"], :name => "index_projects_on_state"
-
-  create_table "stories", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.text     "content"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "signed_terms", :default => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "login"
