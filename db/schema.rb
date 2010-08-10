@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100728143209) do
+ActiveRecord::Schema.define(:version => 20100810172509) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20100728143209) do
   end
 
   add_index "cities", ["name"], :name => "index_cities_on_name"
+
+  create_table "clients", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "event_pictures", :force => true do |t|
     t.integer  "event_id"
@@ -66,6 +72,22 @@ ActiveRecord::Schema.define(:version => 20100728143209) do
   create_table "pages", :force => true do |t|
     t.string   "name"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.integer  "code"
+    t.integer  "project_type_id"
+    t.integer  "project_manager_id"
+    t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
