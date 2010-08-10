@@ -9,6 +9,32 @@ class AddressTest < ActiveSupport::TestCase
     
     should belong_to :client
     should belong_to :address_type
+    
+    context "with an email" do 
+      context "that is valid" do
+        setup do
+          @address.email = "test.user@example.org"
+          @address.valid?
+        end
+        
+        should "have no errors on email" do
+          assert ! @address.errors.has_key?(:email)
+        end
+      end
+      
+      context "that is invalid" do
+        setup do
+          @address.email = "test.user@example##"
+          @address.valid?
+        end
+        
+        should "have errors on email" do
+          assert @address.errors.has_key?(:email)
+        end
+      end
+    end
+    
+    
   end
   
 end
