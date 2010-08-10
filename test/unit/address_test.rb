@@ -15,6 +15,7 @@ class AddressTest < ActiveSupport::TestCase
     should validate_presence_of :city
     should validate_presence_of :state
     should validate_presence_of :phone
+    should validate_presence_of :email
     
     context "with an email" do 
       context "that is valid" do
