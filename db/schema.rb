@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810192143) do
+ActiveRecord::Schema.define(:version => 20100810194639) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(:version => 20100810192143) do
   end
 
   add_index "clients", ["name"], :name => "index_clients_on_name"
+
+  create_table "project_durations", :force => true do |t|
+    t.date     "start"
+    t.date     "end"
+    t.float    "hours_allocated", :default => 0.0
+    t.float    "hours_elapsed",   :default => 0.0
+    t.text     "notes"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_durations", ["project_id"], :name => "index_project_durations_on_project_id"
 
   create_table "project_types", :force => true do |t|
     t.string   "name"

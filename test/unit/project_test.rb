@@ -10,6 +10,7 @@ class ProjectTest < ActiveSupport::TestCase
     should belong_to :project_manager
     should belong_to :client
     should belong_to :project_type
+    should have_many :project_durations
     
     should validate_uniqueness_of :code
     should validate_presence_of :code

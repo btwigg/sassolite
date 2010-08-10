@@ -31,6 +31,15 @@ Factory.define :project do |p|
   p.association :project_type
 end
 
+Factory.define :project_duration do |d|
+  d.start { Time.now - 1.week }
+  d.end { Time.now + 1.week }
+  d.hours_allocated 80
+  d.hours_elapsed 40
+  d.notes "Duration notes"
+  d.association :project
+end
+
 Factory.define :user do |u|
   u.login "sampleUser"
   u.password "password"
