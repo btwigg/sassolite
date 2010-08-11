@@ -23,8 +23,12 @@ class Admin::UsersControllerTest < ActionController::TestCase
         assert_select "table"
       end
       
-      should "display a table header for User" do
-        assert_select "th", /User/
+      should "display a table header for Login" do
+        assert_select "th", /Login/
+      end
+      
+      should "display a table header for Name" do
+        assert_select "th", /Name/
       end
       
       should "display a table header for Actions" do
