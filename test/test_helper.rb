@@ -21,11 +21,15 @@ end
 
 # Test helpers
 def create_user
-  # Creating our user automatically logs them in
-  @user = Factory.create(:user)
+  login_user
   
   # Manually destroy it
   UserSession.find.destroy
+end
+
+def login_user
+  @user = Factory.create(:user)
+  
 end
 
 def should_redirect_home
