@@ -10,6 +10,7 @@ gem "transitions", :require => ["transitions", "active_record/transitions"]
 gem "RedCloth"
 gem "paperclip"
 gem "rack-flash-session", :require => 'rack/flash-session'
+gem 'will_paginate', :git => "http://github.com/mislav/will_paginate.git", :branch => "rails3"
 
 group :test do
   gem "shoulda"

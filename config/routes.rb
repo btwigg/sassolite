@@ -1,4 +1,9 @@
 Config::Application.routes.draw do
+  
+  namespace :admin do
+    resources :users
+  end
+  
   resources :user_sessions do
     delete :destroy, :on => :collection
   end

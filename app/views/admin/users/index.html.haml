@@ -1,0 +1,12 @@
+%h2 Users
+= link_to "New User", new_admin_user_path
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Actions
+  %tbody
+    = render @users
+    
+= will_paginate @users
