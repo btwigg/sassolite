@@ -5,6 +5,7 @@ class ProjectDurationTest < ActiveSupport::TestCase
   context "A ProjectDuration" do
     setup do
       @project_duration = Factory.create(:project_duration)
+      @project = @project_duration.project
     end
     
     should belong_to :project
@@ -43,8 +44,6 @@ class ProjectDurationTest < ActiveSupport::TestCase
     
     context "with several durations for a project" do
       setup do
-        @project = @project_duration.project
-
         @old_project1 = @project_duration.clone
         @old_project1.start = Time.now - 3.months
         @old_project1.end = Time.now - 2.months
@@ -65,6 +64,33 @@ class ProjectDurationTest < ActiveSupport::TestCase
       end
 
     end
+    
+    context "that is after an existing duration for a project" do
+      setup do
+        @duration = @project_duration.clone
+        @duration.start = @project_duration.end + 1.day
+        @duration.end = @project_duration.end + 1.week
+        @duration.valid?
+      end
+      
+      should "be valid" do
+        assert ! @duration.errors.has_key?(:base)
+      end
+    end
+    
+    context "that overlaps with an existing duration for a project" do
+      setup do
+        @duration = @project_duration.clone
+        @duration.start = @project_duration.end
+        @duration.end = @project_duration.end + 1.week
+        @duration.valid?
+      end
+      
+      should "not be valid" do
+        assert @duration.errors.has_key?(:base)
+      end
+    end
+  
     
   end
   

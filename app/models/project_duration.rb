@@ -4,6 +4,7 @@ class ProjectDuration < ActiveRecord::Base
   validates :start, :presence => true
   validates :end, :presence => true
   validates_with DurationValidator
+  validates_with ActiveDurationValidator
   
   scope :past, where(["end < ?", Date.today])
   scope :current, where(["start <= ? AND end >= ?", Date.today, Date.today])
