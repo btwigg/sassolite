@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
   has_many :managed_projects, :class_name => "Project", :foreign_key => "project_manager_id"
   
-  validates :email, :presence => true, :uniqueness => true, :email_format => true
+  validates :email, :presence => true, :uniqueness => true
   validates :initials, :presence => true, :uniqueness => true
   validates :name, :presence => true, :uniqueness => true
    
