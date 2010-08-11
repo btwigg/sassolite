@@ -3,4 +3,4 @@
 require ::File.expand_path('../config/environment',  __FILE__)
 require 'rack/flash-session'
 
-run Sassolite::Application
+run Config::Application

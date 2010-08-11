@@ -1,33 +1,3 @@
-/* Standard elements */
-a {
-  color: #95506f;
-  text-decoration: none; }
-
-h1 {
-  font: 2em Georgia;
-  color: #602800;
-  margin-bottom: 10px; }
-
-h2 {
-  font: 1.5em Georgia;
-  color: #602800;
-  margin-bottom: 10px; }
-
-table {
-  border: 1px solid #e6e1e6;
-  width: 90%;
-  margin: 0.5em auto; }
-  table thead th {
-    padding: 0.5em;
-    background-color: #944b68;
-    color: #fefefe; }
-  table tbody tr td {
-    padding: 0.5em; }
-  table tbody .even {
-    background-color: white; }
-  table tbody .odd {
-    background-color: #e6e1e6; }
-
 /* Form classes */
 .error, .notice, .success {
   padding: 0.8em;
@@ -62,33 +32,3 @@ table {
   border: 2px solid #dddddd;
   border-color: #fbc2c4;
   background: #fbe3e4; }
-
-/* Content markup classes */
-#breadcrumb {
-  padding: 1em 0.25em;
-  font-style: oblique;
-  color: #211d1e; }
-  #breadcrumb a {
-    color: #95506f; }
-
-#main {
-  width: 940px;
-  margin: 0 auto; }
-
-/* jQuery lightBox plugin - Gallery style */
-#gallery {
-  background-color: #444444;
-  padding: 10px; }
-  #gallery ul {
-    list-style: none; }
-    #gallery ul li {
-      display: inline; }
-    #gallery ul img {
-      border: 5px solid #3e3e3e;
-      border-width: 5px 5px 20px; }
-    #gallery ul a:hover img {
-      border: 5px solid white;
-      border-width: 5px 5px 20px;
-      color: white; }
-    #gallery ul a:hover {
-      color: white; }
