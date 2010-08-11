@@ -1,4 +1,4 @@
 %tr{:class => cycle('even','odd')}
   %td= user.login
-  %td
+  %td= link_to "Destroy", admin_user_path(user), :method => :delete, :confirm => "Are you sure you want to delete '#{user.login}'?  This action is permanent."
     

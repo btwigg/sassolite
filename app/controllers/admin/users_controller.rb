@@ -22,4 +22,16 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    
+    if User.count > 1
+      @user.destroy
+      flash[:notice] = "User '#{@user.login}' has been deleted."
+    else
+      flash[:error] = "User '#{@user.login}' cannot be deleted.  At least one user must exist in the system."
+    end
+    
+    redirect_to admin_users_path
+  end
 end

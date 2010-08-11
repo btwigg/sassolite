@@ -82,5 +82,42 @@ class Admin::UsersControllerTest < ActionController::TestCase
       
     end
     
+    context "on DELETE to #destroy" do
+      context "with one user" do
+        setup do
+          # create a second user
+          @alternate_user = Factory.create(
+            :user, 
+            :login => "alternateUser", 
+            :name => "Alternate User", 
+            :email => "alternate.user@example.com", 
+            :initials => "AU",
+            :password => "fakePassword",
+            :password_confirmation => "fakePassword"
+          )
+
+          delete :destroy, :id => @alternate_user
+        end
+        
+        should redirect_to("admin users index") { admin_users_path }
+        should assign_to(:user)
+        should set_the_flash.to "User 'alternateUser' has been deleted."
+      end
+
+      context "with more than one user" do
+        setup do
+          delete :destroy, :id => @user
+        end
+        
+        should redirect_to("admin users index") { admin_users_path }
+        should assign_to(:user)
+        should set_the_flash.to "User 'sampleUser' cannot be deleted.  At least one user must exist in the system."
+        
+        should "have 1 user left in the system" do
+          assert_equal 1, User.count
+        end
+      end
+
+    end
   end
 end
