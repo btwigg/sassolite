@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810194639) do
+ActiveRecord::Schema.define(:version => 20100811153711) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(:version => 20100810194639) do
   add_index "projects", ["project_manager_id"], :name => "index_projects_on_project_manager_id"
   add_index "projects", ["project_type_id"], :name => "index_projects_on_project_type_id"
   add_index "projects", ["state"], :name => "index_projects_on_state"
+
+  create_table "status_updates", :force => true do |t|
+    t.text     "description"
+    t.date     "entry_date",          :default => '2010-08-11'
+    t.integer  "user_id"
+    t.integer  "project_duration_id"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login"

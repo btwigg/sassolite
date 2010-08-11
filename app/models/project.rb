@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
   belongs_to :project_type
   
   has_many :project_durations
+  has_many :status_updates, :through => :project_durations
   
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true

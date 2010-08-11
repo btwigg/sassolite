@@ -45,3 +45,11 @@ Factory.define :user do |u|
   u.password "password"
   u.password_confirmation "password"
 end
+
+Factory.define :status_update do |u|
+  u.entry_date { Date.today }
+  #u.association :user
+  u.association :project_duration
+  u.description "Lorem ipsom dolar"
+end
+
