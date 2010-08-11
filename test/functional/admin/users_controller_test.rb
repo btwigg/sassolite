@@ -54,7 +54,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
       
       context "with valid data" do
         setup do
-          post :create, :user => { :login => "newuser"}
+          post :create, :user => { :login => "newuser", :initials => "NU", :name => "New User", :email => "new.user@example.com"}
         end
         
         should redirect_to("admin users index") { admin_users_path }

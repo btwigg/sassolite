@@ -42,6 +42,9 @@ end
 
 Factory.define :user do |u|
   u.login "sampleUser"
+  u.initials "SU"
+  u.name "Sample User"
+  u.email "sample.user@example.com"
   u.password "password"
   u.password_confirmation "password"
 end
