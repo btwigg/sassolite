@@ -24,6 +24,12 @@
 %body
   .container
     
+    .span-22
+      %h1 Sassolite
+    .span-2.last
+      - if current_user
+        = link_to "Log Out", logout_path
+    
     .span-24
       -# Flash messages
       - if flash[:error]
