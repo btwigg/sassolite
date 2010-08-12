@@ -1,0 +1,14 @@
+#breadcrumb
+  = link_to "Back", admin_clients_path
+
+%h2== Editing '#{@client.name}'
+
+= form_for :client, :url => admin_client_path(@user), :method => :put do |f|
+  = f.error_messages
+  
+  = f.label :name
+  %br
+  = f.text_field :name
+  %br
+      
+  = f.submit

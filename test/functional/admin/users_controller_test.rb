@@ -49,9 +49,8 @@ class Admin::UsersControllerTest < ActionController::TestCase
         assert_select "h2", /New User/
       end
       
-      should "display a form" do
-        assert_select "form"
-      end
+      should_display_a_form
+      should_display_a_breadcrumb
     end
     
     context "on POST to #create" do
@@ -79,9 +78,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
         should assign_to :user
         should render_template :new
         
-        should "display an error message" do
-          assert_select "div.errorExplanation"
-        end
+        should_display_an_error_message
       end
       
     end

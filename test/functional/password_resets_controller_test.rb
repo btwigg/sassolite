@@ -19,9 +19,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
         assert_select "h2", /Password Reset/
       end
       
-      should "display a form" do
-        assert_select "form"
-      end
+      should_display_a_form
     end
     
     context "on POST to #create" do

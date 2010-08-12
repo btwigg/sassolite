@@ -24,6 +24,10 @@ class Admin::ClientsControllerTest < ActionController::TestCase
         assert_select "div.client"
       end
       
+      should "display link to new client" do
+        assert_select "a", /New Client/
+      end
+      
     end
     
     context "on GET to #new" do
@@ -39,9 +43,8 @@ class Admin::ClientsControllerTest < ActionController::TestCase
         assert_select "h2", /New Client/
       end
       
-      should "display a form" do
-        assert_select "form"
-      end
+      should_display_a_form
+      should_display_a_breadcrumb
     end
        
     context "on POST to #create" do
@@ -64,9 +67,7 @@ class Admin::ClientsControllerTest < ActionController::TestCase
         should assign_to :client
         should render_template :new
   
-        should "display an error message" do
-          assert_select "div.errorExplanation"
-        end
+        should_display_an_error_message
       end
 
     end
@@ -83,10 +84,9 @@ class Admin::ClientsControllerTest < ActionController::TestCase
       should "display Editing 'Client Name' headline" do
         assert_select "h2", /Editing '#{@client.name}'/
       end
-  
-      should "display a form" do
-        assert_select "form"
-      end
+      
+      should_display_a_form
+      should_display_a_breadcrumb
     end
     
     context "on PUT to #update" do
@@ -98,12 +98,12 @@ class Admin::ClientsControllerTest < ActionController::TestCase
         
         should redirect_to("admin clients index") { admin_clients_path }
         should assign_to :client
-        should set_the_flash.to "Client 'Quentin Corp' has been updated."
+        should set_the_flash.to "Client 'New Client' has been updated."
       end
       
       context "with invalid data" do
         setup do
-          put :update, :client => { :name => ""}
+          put :update, :client => { :name => ""}, :id => @client
         end
         
         should respond_with :unprocessable_entity
@@ -111,9 +111,7 @@ class Admin::ClientsControllerTest < ActionController::TestCase
         should render_template :edit
         should set_the_flash.to "Client could not be updated."
 
-        should "display an error message" do
-          assert_select "div.errorExplanation"
-        end
+        should_display_an_error_message
       end
       
     end

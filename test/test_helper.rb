@@ -16,6 +16,7 @@ class ActiveSupport::TestCase
 end
 
 class ActionController::TestCase
+  
    setup :activate_authlogic
 end
 
@@ -28,10 +29,28 @@ def create_user
 end
 
 def login_user
-  @user = Factory.create(:user)
-  
+  @user = Factory.create(:user)  
 end
 
+# Shoulda macros
 def should_redirect_home
   should redirect_to("home") { new_user_session_path }
+end
+
+def should_display_a_form
+  should "display a form" do
+    assert_select "form"
+  end
+end
+
+def should_display_a_breadcrumb
+  should "display a breadcrumb" do
+    assert_select "div#breadcrumb"
+  end
+end
+
+def should_display_an_error_message
+  should "display an error message" do
+    assert_select "div.errorExplanation"
+  end
 end

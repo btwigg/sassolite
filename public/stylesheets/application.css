@@ -32,3 +32,12 @@
   border: 2px solid #dddddd;
   border-color: #fbc2c4;
   background: #fbe3e4; }
+
+/* Clients */
+.client {
+  background-color: #eeeeee;
+  border: 1px solid #444444;
+  padding: 1.25em; }
+  .client .actions {
+    width: 200px;
+    float: right; }
