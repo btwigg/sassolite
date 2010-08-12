@@ -19,19 +19,24 @@
     color: #264409; }
 
 .errorExplanation {
-  padding: 0.8em;
-  margin-bottom: 1em;
-  border: 2px solid #dddddd;
   background: #fbe3e4;
+  border: 2px solid #dddddd;
+  border-color: #fbc2c4;
   color: #8a1f11;
-  border-color: #fbc2c4; }
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.8em;
+  width: 640px; }
   .errorExplanation h2 {
     color: #8a1f11; }
 
 .field_with_errors {
   border: 2px solid #dddddd;
   border-color: #fbc2c4;
-  background: #fbe3e4; }
+  background: #fbe3e4;
+  display: table;
+  padding: 2px; }
 
 /* Clients */
 .client {
