@@ -10,9 +10,10 @@ class Admin::UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    @user.generate_random_password
+    password = @user.generate_random_password
         
     if @user.save
+      UserMailer.password_reset(@user, password).deliver
       flash[:notice] = "Created user '#{@user.login}'."
       redirect_to admin_users_path
     else
