@@ -10,6 +10,8 @@ class AddressTest < ActiveSupport::TestCase
     should belong_to :client
     should belong_to :address_type
     
+    should validate_uniqueness_of(:address_type_id).scoped_to(:client_id)
+    
     should validate_presence_of :name
     should validate_presence_of :address1
     should validate_presence_of :city
