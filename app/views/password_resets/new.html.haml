@@ -1,0 +1,11 @@
+%h2 Password Reset
+
+%h3 Please enter your login or email address.
+
+= form_for :user, :url => password_resets_path do |f|
+  = f.label :login, "Login / Email Address"
+  %br
+  = f.text_field :login
+  %br  
+  
+  = f.submit
