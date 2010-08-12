@@ -1,0 +1,57 @@
+#breadcrumb
+  = link_to "Back", admin_clients_path
+
+%h2 New Client
+
+= form_for :address, :url => admin_client_addresses_path(@client, :address_type_id => @address_type) do |f|
+  = f.error_messages
+  
+  = f.label :address_type
+  %p= @address_type.name
+  
+  = f.label :name
+  %br
+  = f.text_field :name
+  %br
+  
+  = f.label :address1
+  %br
+  = f.text_field :address1
+  %br
+  
+  = f.label :address2
+  %br
+  = f.text_field :address2
+  %br
+  
+  = f.label :city
+  %br
+  = f.text_field :city
+  %br
+  
+  = f.label :state
+  %br
+  = f.text_field :state
+  %br
+  
+  = f.label :zipcode
+  %br
+  = f.text_field :zipcode
+  %br
+  
+  = f.label :phone
+  %br
+  = f.text_field :phone
+  %br
+  
+  = f.label :fax
+  %br
+  = f.text_field :fax
+  %br
+  
+  = f.label :url
+  %br
+  = f.text_field :url
+  %br
+      
+  = f.submit
