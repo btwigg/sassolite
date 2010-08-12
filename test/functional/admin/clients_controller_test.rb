@@ -28,6 +28,20 @@ class Admin::ClientsControllerTest < ActionController::TestCase
         assert_select "a", /New Client/
       end
       
+      should "display a link to a new mailing address" do
+        assert_select "a", /New Mailing Address/
+      end
+      
+      should "display a link to a new billing address" do
+        assert_select "a", /New Billing Address/
+      end
+    end
+    
+    context "with existing addresses" do
+      setup do
+        Factory.create(:address_type, :name => "Billing")
+        @address = Factory.create(:address)
+      end
     end
     
     context "on GET to #new" do
