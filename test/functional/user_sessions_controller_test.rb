@@ -14,6 +14,10 @@ class UserSessionsControllerTest < ActionController::TestCase
       
       should respond_with(:success)
       should render_template :new
+      
+      should "display a link to password reset" do
+        assert_select "a", /Password Reset/
+      end
     end
     
     context "on POST to #create" do
