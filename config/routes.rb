@@ -1,6 +1,7 @@
 Config::Application.routes.draw do
   
   namespace :admin do
+    resources :clients
     resources :users
   end
   
