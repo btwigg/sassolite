@@ -4,6 +4,7 @@ Config::Application.routes.draw do
     resources :clients do
       resources :addresses
     end
+    resources :projects
     resources :users
   end
   

@@ -27,7 +27,7 @@ end
 Factory.define :project do |p|
   p.code 1701
   p.name "Space Seeding"
-  p.association :project_manager, :factory => :user
+  #p.association :project_manager, :factory => :user
   p.association :project_type
 end
 

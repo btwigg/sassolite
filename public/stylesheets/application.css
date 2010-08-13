@@ -38,12 +38,12 @@
   display: table;
   padding: 2px; }
 
-/* Clients */
-.client {
+/* Client & Project shared interfaces */
+.boxy {
   background-color: #eeeeee;
   border: 1px solid #444444;
   margin: 10px 0;
   padding: 1.25em; }
-  .client .actions {
+  .boxy .actions {
     width: 200px;
     float: right; }

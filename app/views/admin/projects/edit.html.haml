@@ -1,0 +1,14 @@
+#breadcrumb
+  = link_to "Back", admin_projects_path
+
+%h2== Editing '#{@project.name}'
+
+= form_for :project, :html => {:method => :put}, :url => admin_project_path(@project) do |f|
+  = f.error_messages
+  
+  = f.label :name
+  %br
+  = f.text_field :name
+  %br
+      
+  = f.submit

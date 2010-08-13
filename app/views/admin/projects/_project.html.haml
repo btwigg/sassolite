@@ -1,0 +1,6 @@
+.project.boxy
+  .actions
+    = link_to "Edit", edit_admin_project_path(project)
+    = link_to "Destroy", admin_project_path(project), :method => :delete, :confirm => "Are sure you want to destroy this project?  This action cannot be undone."
+  
+  %h3= project.name

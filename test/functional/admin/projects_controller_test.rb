@@ -5,6 +5,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     setup do
       login_user
       @project = Factory.create(:project)
+      Factory.create(:project_number)
     end
     
     context "on GET to #index" do
@@ -41,13 +42,15 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       
       should_display_a_form
       should_display_a_breadcrumb
+      
+      should assign_to(:project_managers)
     end
        
     context "on POST to #create" do
            
       context "with valid data" do
         setup do
-          post :create, :project => { :name => "New Project X"}
+          post :create, :project => { :name => "Seti Alpha 6 Exploration"}
         end
   
         should redirect_to("admin projects index") { admin_projects_path }
@@ -62,6 +65,8 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         should respond_with :unprocessable_entity
         should assign_to :project
         should render_template :new
+        
+        should assign_to(:project_managers)
   
         should_display_an_error_message
       end
@@ -77,22 +82,24 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       should assign_to :project
       should render_template :edit
       
-      should_display_a_headline "Editing 'Quentin Corp'"
+      should_display_a_headline "Editing 'Space Seeding'"
       
       should_display_a_form
       should_display_a_breadcrumb
+      
+      should assign_to(:project_managers)
     end
     
     context "on PUT to #update" do
       
       context "with valid data" do
         setup do
-          put :update, :project => { :name => "New Project"}, :id => @project
+          put :update, :project => { :name => "Seti Alpha 6 Exploration"}, :id => @project
         end
         
         should redirect_to("admin projects index") { admin_projects_path }
         should assign_to :project
-        should set_the_flash.to "Project 'New Project' has been updated."
+        should set_the_flash.to "Project 'Seti Alpha 6 Exploration' has been updated."
       end
       
       context "with invalid data" do
@@ -104,6 +111,8 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         should assign_to :project
         should render_template :edit
         should set_the_flash.to "Project could not be updated."
+        
+        should assign_to(:project_managers)
 
         should_display_an_error_message
       end
@@ -117,7 +126,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   
       should redirect_to("admin projects index") { admin_projects_path }
       should assign_to(:project)
-      should set_the_flash.to "Project 'Quentin Corp' has been deleted."
+      should set_the_flash.to "Project 'Space Seeding' has been deleted."
   
     end
   end
