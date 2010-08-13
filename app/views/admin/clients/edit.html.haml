@@ -3,7 +3,7 @@
 
 %h2== Editing '#{@client.name}'
 
-= form_for :client, :url => admin_client_path(@user), :method => :put do |f|
+= form_for :client, :html => {:method => :put}, :url => admin_client_path(@client) do |f|
   = f.error_messages
   
   = f.label :name

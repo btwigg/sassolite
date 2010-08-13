@@ -3,7 +3,7 @@
 
 %h2 Edit Address
 
-= form_for :address, :method => :put, :url => admin_client_addresses_path(@client, @address, :address_type_id => @address_type) do |f|
+= form_for :address, :html => {:method => :put}, :url => admin_client_addresses_path(@client, @address, :address_type_id => @address_type) do |f|
   = f.error_messages
   
   = f.label :address_type

@@ -42,6 +42,7 @@
 .client {
   background-color: #eeeeee;
   border: 1px solid #444444;
+  margin: 10px 0;
   padding: 1.25em; }
   .client .actions {
     width: 200px;
