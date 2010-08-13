@@ -54,3 +54,9 @@ def should_display_an_error_message
     assert_select "div.errorExplanation"
   end
 end
+
+def should_display_a_headline(headline)
+  should "display '#{headline}' headline" do
+    assert_select "h2", /#{headline}/
+  end
+end

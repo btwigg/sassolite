@@ -9,7 +9,7 @@ class Admin::ClientsControllerTest < ActionController::TestCase
     
     context "on GET to #index" do
       setup do
-        get :index, :id => @client.name
+        get :index
       end
       
       should respond_with :success
@@ -39,8 +39,25 @@ class Admin::ClientsControllerTest < ActionController::TestCase
     
     context "with existing addresses" do
       setup do
-        Factory.create(:address_type, :name => "Billing")
-        @address = Factory.create(:address)
+        # Create a mailing address
+        address = @client.addresses.new
+        address.address_type = Factory.create(:address_type)
+        address.save(false)
+        
+        # Create a billing address
+        address = @client.addresses.new
+        address.address_type = Factory.create(:address_type, :name => "Billing")
+        address.save(false)
+        
+        get :index
+      end
+      
+      should "display a link to edit the mailing address" do
+        assert_select "a", /Edit Mailing Address/
+      end
+      
+      should "display a link to edit the billing address" do
+        assert_select "a", /Edit Billing Address/
       end
     end
     

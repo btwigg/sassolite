@@ -6,12 +6,12 @@
   %h3= client.name
   
   - if client.billing_address
-    = link_to "Edit Billing Address", admin_client_address_path(client, client.billing_address, :address_type_id => AddressType.where(:name => "Billing").first )
+    = link_to "Edit Billing Address", edit_admin_client_address_path(client, client.billing_address, :address_type_id => AddressType.where(:name => "Billing").first )
   - else
     = link_to "New Billing Address", new_admin_client_address_path(client, :address_type_id => AddressType.where(:name => "Billing").first )
     
   - if client.mailing_address
-    = link_to "Edit Mailing Address", admin_client_address_path(client, client.billing_address, :address_type_id => AddressType.where(:name => "Mailing").first )
+    = link_to "Edit Mailing Address", edit_admin_client_address_path(client, client.billing_address, :address_type_id => AddressType.where(:name => "Mailing").first )
   - else
     = link_to "New Mailing Address", new_admin_client_address_path(client, :address_type_id => AddressType.where(:name => "Mailing").first )
   

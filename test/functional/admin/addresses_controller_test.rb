@@ -27,6 +27,8 @@ class Admin::AddressesControllerTest < ActionController::TestCase
         should "display the address type" do
           assert_select "p", /Mailing/
         end
+        
+        should_display_a_headline "New Address"
       end
       
       context "on POST to #create" do
@@ -90,6 +92,8 @@ class Admin::AddressesControllerTest < ActionController::TestCase
         should "display the address type" do
           assert_select "p", /Mailing/
         end
+        
+        should_display_a_headline "Edit Address"
       end
       
       context "on PUT to #update" do

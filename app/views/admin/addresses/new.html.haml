@@ -1,7 +1,7 @@
 #breadcrumb
   = link_to "Back", admin_clients_path
 
-%h2 New Client
+%h2 New Address
 
 = form_for :address, :url => admin_client_addresses_path(@client, :address_type_id => @address_type) do |f|
   = f.error_messages
@@ -12,6 +12,11 @@
   = f.label :name
   %br
   = f.text_field :name
+  %br
+  
+  = f.label :email
+  %br
+  = f.text_field :email
   %br
   
   = f.label :address1
