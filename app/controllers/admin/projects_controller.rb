@@ -1,5 +1,5 @@
 class Admin::ProjectsController < ApplicationController
-  before_filter :load_pms
+  before_filter :load_relational_data, :except => [:index, :destroy]
   
   def index
     @projects = Project.paginate(:page => params[:page], :per_page => 5)
@@ -47,8 +47,9 @@ class Admin::ProjectsController < ApplicationController
   
   protected
   
-  def load_pms
+  def load_relational_data
     @project_managers = User.all
+    @project_types = ProjectType.all
   end
   
 end

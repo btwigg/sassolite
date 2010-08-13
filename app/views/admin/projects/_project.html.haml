@@ -4,3 +4,14 @@
     = link_to "Destroy", admin_project_path(project), :method => :delete, :confirm => "Are sure you want to destroy this project?  This action cannot be undone."
   
   %h3= project.name
+  
+  %p== Project Code: #{project.code}
+  
+  %p== Project Type: #{project.project_type.name}
+
+  %p== Project Manager: #{project.project_manager.name}
+  
+  - if last_duration = project.project_durations.last
+    %p== Project Duration: #{last_duration.start.strftime("%m/%d/%Y")} - #{last_duration.end.strftime("%m/%d/%Y")}
+  - else
+    %p== Project Duration: n/a

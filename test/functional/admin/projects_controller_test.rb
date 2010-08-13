@@ -4,7 +4,8 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   context "An Admin::ProjectsController" do
     setup do
       login_user
-      @project = Factory.create(:project)
+      @project = Factory.create(:project, :project_manager => @user)
+      @project.project_durations.create(:start => "04/01/2012", :end => "05/01/2012")
       Factory.create(:project_number)
     end
     
@@ -27,6 +28,22 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         assert_select "a", /New Project/
       end
       
+      should "display name of project code" do
+        assert_select "p", /Project Code: 1701/
+      end
+      
+      should "display name of project manager" do
+        assert_select "p", /Project Manager: Sample User/
+      end
+      
+      should "display project type " do
+        assert_select "p", /Project Type: Time &amp; Maintenance/
+      end
+      
+      should "current duration" do
+        assert_select "p", /Duration: 04\/01\/2012 - 05\/01\/2012/
+      end
+      
     end
     
     context "on GET to #new" do
@@ -44,6 +61,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       should_display_a_breadcrumb
       
       should assign_to(:project_managers)
+      should assign_to(:project_types)
     end
        
     context "on POST to #create" do
@@ -67,6 +85,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         should render_template :new
         
         should assign_to(:project_managers)
+        should assign_to(:project_types)
   
         should_display_an_error_message
       end
@@ -88,6 +107,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       should_display_a_breadcrumb
       
       should assign_to(:project_managers)
+      should assign_to(:project_types)
     end
     
     context "on PUT to #update" do
@@ -113,6 +133,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         should set_the_flash.to "Project could not be updated."
         
         should assign_to(:project_managers)
+        should assign_to(:project_types)
 
         should_display_an_error_message
       end
