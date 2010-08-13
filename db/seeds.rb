@@ -7,3 +7,5 @@ ProjectType.create(:name => "Fixed Price")
 
 AddressType.create(:name => "Mailing")
 AddressType.create(:name => "Billing")
+
+ProjectNumber.create(:code => 5959)

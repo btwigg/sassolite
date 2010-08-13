@@ -31,6 +31,10 @@ Factory.define :project do |p|
   p.association :project_type
 end
 
+Factory.define :project_number do |n|
+  n.code 5959
+end
+
 Factory.define :project_duration do |d|
   d.start { Time.now - 1.week }
   d.end { Time.now + 1.week }
