@@ -15,9 +15,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
       should assign_to :users
       should render_template :index
       
-      should "display Users headline" do
-        assert_select "h2", /Users/
-      end
+      should_display_a_headline "Users"
       
       should "display a table of users" do
         assert_select "table"
@@ -45,9 +43,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
       should assign_to :user
       should render_template :new
       
-      should "display New User headline" do
-        assert_select "h2", /New User/
-      end
+      should_display_a_headline "New User"
       
       should_display_a_form
       should_display_a_breadcrumb

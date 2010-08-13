@@ -16,9 +16,7 @@ class Admin::ClientsControllerTest < ActionController::TestCase
       should assign_to :clients
       should render_template :index
       
-      should "display Clients headline" do
-        assert_select "h2", /Clients/
-      end
+      should_display_a_headline "Clients"
       
       should "display clients" do
         assert_select "div.client"
@@ -70,9 +68,7 @@ class Admin::ClientsControllerTest < ActionController::TestCase
       should assign_to :client
       should render_template :new
       
-      should "display New Client headline" do
-        assert_select "h2", /New Client/
-      end
+      should_display_a_headline "New Client"
       
       should_display_a_form
       should_display_a_breadcrumb
@@ -111,10 +107,8 @@ class Admin::ClientsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to :client
       should render_template :edit
-  
-      should "display Editing 'Client Name' headline" do
-        assert_select "h2", /Editing '#{@client.name}'/
-      end
+      
+      should_display_a_headline "Editing 'Quentin Corp'"
       
       should_display_a_form
       should_display_a_breadcrumb

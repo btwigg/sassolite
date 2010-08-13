@@ -15,9 +15,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
       should respond_with :success
       should render_template :new
       
-      should "display Password Reset headline" do
-        assert_select "h2", /Password Reset/
-      end
+      should_display_a_headline "Password Reset"
       
       should_display_a_form
     end
