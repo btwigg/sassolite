@@ -62,6 +62,14 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       
       should assign_to(:project_managers)
       should assign_to(:project_types)
+      
+      should "select a project manager" do
+        assert_select "label", /Project Manager/
+      end
+      
+      should "select a project type" do
+        assert_select "label", /Project Type/
+      end
     end
        
     context "on POST to #create" do
@@ -108,6 +116,14 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       
       should assign_to(:project_managers)
       should assign_to(:project_types)
+      
+      should "select a project manager" do
+        assert_select "label", /Project Manager/
+      end
+      
+      should "select a project type" do
+        assert_select "label", /Project Type/
+      end
     end
     
     context "on PUT to #update" do
