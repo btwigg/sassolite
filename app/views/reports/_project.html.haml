@@ -1,0 +1,17 @@
+- row_class = cycle('even','odd')
+%tr.report-details{:class => row_class }
+  %td
+    = project.code
+  %td
+    = project.name
+  %td
+    = project.client.name
+  %td
+    = project.project_manager.name
+  %td
+    = project.project_durations.current.first.hours_allocated
+  %td
+    = project.project_durations.current.first.hours_elapsed
+%tr.report-update{:class => row_class }
+  %td{:colspan => 6}
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

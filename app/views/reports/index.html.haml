@@ -1,0 +1,13 @@
+%h2== Report for #{@date.to_s(:long)}
+
+%table#report
+  %thead
+    %tr
+      %th Job #
+      %th Job Title
+      %th Client
+      %th Project Manager
+      %th Baseline Hours
+      %th Actual Hours
+  %tbody
+    = render :collection => @projects, :partial => "reports/project"

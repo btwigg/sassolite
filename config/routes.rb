@@ -12,6 +12,8 @@ Config::Application.routes.draw do
   
   resources :password_resets
   
+  resources :reports
+  
   resources :user_sessions do
     delete :destroy, :on => :collection
   end
