@@ -99,6 +99,10 @@ class Admin::UsersControllerTest < ActionController::TestCase
         should redirect_to("admin users index") { admin_users_path }
         should assign_to(:user)
         should set_the_flash.to "User 'alternateUser' has been deleted."
+        
+        should "set the user state to disabled" do
+          assert_equal "disabled", assigns(:user).state
+        end
       end
 
       context "with more than one user" do

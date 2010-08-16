@@ -22,22 +22,41 @@ class UserSessionsControllerTest < ActionController::TestCase
     
     context "on POST to #create" do
       
-      context "with valid user credentials" do
-        setup do
-          post :create, :user_session => { :login => "sampleUser", :password => "password"}
+      context "for an enabled user" do
+        context "with valid user credentials" do
+          setup do
+            post :create, :user_session => { :login => "sampleUser", :password => "password"}
+          end
+
+          should redirect_to("home") { root_path }
         end
-        
-        should redirect_to("home") { root_path }
+
+        context "with invalid user credentials" do
+          setup do    
+            post :create, :user_session => { :login => "sampleUser", :password => "failure"}
+          end
+
+          should respond_with(:unprocessable_entity)
+          should render_template :new
+        end
       end
       
-      context "with invalid user credentials" do
-        setup do    
-          post :create, :user_session => { :login => "sampleUser", :password => "failure"}
+      context "for a disabled user" do
+        setup do
+          @user.disable!
         end
         
-        should respond_with(:success)
-        should render_template :new
+        context "with valid user credentials" do
+          setup do
+            post :create, :user_session => { :login => "sampleUser", :password => "password"}
+          end
+
+          should set_the_flash.to("Your account is disabled.  We cannot log you in.")
+          should respond_with(:unprocessable_entity)
+          should render_template :new
+        end
       end
+      
     end
     
     context "on DELETE to destroy" do

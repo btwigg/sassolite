@@ -16,6 +16,34 @@ class UserTest < ActiveSupport::TestCase
     should validate_uniqueness_of :name
     should validate_uniqueness_of :initials
     should validate_uniqueness_of :email
+    
+    context "by default" do
+      should "have a status of enabled" do
+        assert_equal "enabled", @user.state
+      end
+    end
+
+    context "on disable" do
+      setup do
+        @user.disable!
+      end
+  
+      should "have a status of disabled" do
+        assert_equal "disabled", @user.state
+      end
+    end
+
+    context "that is disabled and is enableed" do
+      setup do
+        @user.state = "disabled"
+        @user.enable!
+      end
+  
+      should "have a status of enabled" do
+        assert_equal "enabled", @user.state
+      end
+    end
+    
   end
   
 end

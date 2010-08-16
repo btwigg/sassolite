@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 10)
+    @users = User.enabled.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
@@ -26,8 +26,8 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     
-    if User.count > 1
-      @user.destroy
+    if User.enabled.count > 1
+      @user.disable!
       flash[:notice] = "User '#{@user.login}' has been deleted."
     else
       flash[:error] = "User '#{@user.login}' cannot be deleted.  At least one user must exist in the system."

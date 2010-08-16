@@ -10,11 +10,22 @@ class UserSessionsController < ApplicationController
   
   def create
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      flash[:notice] = "Login successful!"
-      redirect_back_or_default root_path
+
+    if @user_session.save      
+      # After the session is saved, we can retrieve the user record
+      user = @user_session.record
+      
+      if user.enabled?
+        flash[:notice] = "Login successful!"
+        redirect_back_or_default root_path
+      else
+        @user_session.destroy
+        flash[:error] = "Your account is disabled.  We cannot log you in."
+        render :action => :new, :status => :unprocessable_entity
+      end
     else
-      render :action => :new
+      flash[:error] = "Login failed.  Please try again."
+      render :action => :new, :status => :unprocessable_entity
     end
   end
   
