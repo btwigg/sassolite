@@ -60,3 +60,9 @@ def should_display_a_headline(headline)
     assert_select "h2", /#{headline}/
   end
 end
+
+def should_display_a_link_to(link)
+  should "display a link to '#{link}'" do
+    assert_select "a", /#{link}/
+  end
+end
