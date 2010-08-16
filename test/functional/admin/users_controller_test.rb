@@ -80,7 +80,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     end
     
     context "on DELETE to #destroy" do
-      context "with one user" do
+      context "with more than one user" do
         setup do
           # create a second user
           @alternate_user = Factory.create(
@@ -105,7 +105,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
         end
       end
 
-      context "with more than one user" do
+      context "with one user" do
         setup do
           delete :destroy, :id => @user
         end
@@ -115,7 +115,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
         should set_the_flash.to "User 'sampleUser' cannot be deleted.  At least one user must exist in the system."
         
         should "have 1 user left in the system" do
-          assert_equal 1, User.count
+          assert_equal 1, User.enabled.count
         end
       end
 

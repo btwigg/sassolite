@@ -2,7 +2,7 @@ class Admin::ProjectsController < ApplicationController
   before_filter :load_relational_data, :except => [:index, :destroy]
   
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 5)
+    @projects = Project.open.paginate(:page => params[:page], :per_page => 5)
   end
   
   def new
@@ -23,11 +23,11 @@ class Admin::ProjectsController < ApplicationController
   end
   
   def edit
-    @project = Project.find(params[:id])
+    @project = Project.open.find(params[:id])
   end
   
   def update
-    @project = Project.find(params[:id])
+    @project = Project.open.find(params[:id])
     
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project '#{@project.name}' has been updated."
@@ -40,7 +40,7 @@ class Admin::ProjectsController < ApplicationController
   
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
+    @project.retire!
     flash[:notice] = "Project '#{@project.name}' has been deleted."
     redirect_to admin_projects_path
   end

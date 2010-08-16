@@ -180,6 +180,10 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       should redirect_to("admin projects index") { admin_projects_path }
       should assign_to(:project)
       should set_the_flash.to "Project 'Space Seeding' has been deleted."
+      
+      should "set the project to retired" do
+        assert_equal "retired", assigns(:project).state
+      end
   
     end
   end
