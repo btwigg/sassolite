@@ -9,6 +9,7 @@ class ProjectDurationTest < ActiveSupport::TestCase
     end
     
     should belong_to :project
+    should have_many :status_updates
     
     should validate_presence_of :start
     should validate_presence_of :end
@@ -90,7 +91,32 @@ class ProjectDurationTest < ActiveSupport::TestCase
         assert @duration.errors.has_key?(:base)
       end
     end
-  
+    
+    context "looking for a status update on a specific date" do
+      context "where that date falls into the current range" do
+        setup do
+          @status_update1 = Factory.create(:status_update, :project_duration => @project_duration, :entry_date => Date.today - 0, :description => "lorem", :user => @user)
+          @status_update2 = Factory.create(:status_update, :project_duration => @project_duration, :entry_date => Date.today - 1, :description => "lorem", :user => @user)
+          @status_update3 = Factory.create(:status_update, :project_duration => @project_duration, :entry_date => Date.today - 2, :description => "lorem", :user => @user)
+        end
+        
+        should "return the current duration" do
+          assert_equal @status_update1, @project_duration.update_for(Date.today)
+        end
+      end
+      
+      context "where that date falls after the last duration" do
+        setup do
+          @status_update1 = Factory.create(:status_update, :project_duration => @project_duration, :entry_date => Date.today - 1, :description => "lorem", :user => @user)
+          @status_update2 = Factory.create(:status_update, :project_duration => @project_duration, :entry_date => Date.today - 2, :description => "lorem", :user => @user)
+          @status_update3 = Factory.create(:status_update, :project_duration => @project_duration, :entry_date => Date.today - 3, :description => "lorem", :user => @user)
+        end
+        
+        should "return the current duration" do
+          assert_equal @status_update1, @project_duration.update_for(Date.today)
+        end
+      end
+    end
     
   end
   

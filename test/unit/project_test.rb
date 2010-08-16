@@ -45,6 +45,32 @@ class ProjectTest < ActiveSupport::TestCase
       end
     end
     
+    context "looking for a duration on a specific date" do
+      context "where that date falls into the current range" do
+        setup do
+          @project_duration1 = Factory.create(:project_duration, :project => @project, :start => Date.today - 1, :end => Date.today + 1)
+          @project_duration2 = Factory.create(:project_duration, :project => @project, :start => Date.today - 2, :end => Date.today - 1)
+          @project_duration3 = Factory.create(:project_duration, :project => @project, :start => Date.today - 3, :end => Date.today - 2)
+        end
+        
+        should "return the current duration" do
+          assert_equal @project_duration1, @project.duration_for(Date.today)
+        end
+      end
+      
+      context "where that date falls after the last duration" do
+        setup do
+          @project_duration1 = Factory.create(:project_duration, :project => @project, :start => Date.today - 2, :end => Date.today - 1)
+          @project_duration2 = Factory.create(:project_duration, :project => @project, :start => Date.today - 3, :end => Date.today - 2)
+          @project_duration3 = Factory.create(:project_duration, :project => @project, :start => Date.today - 4, :end => Date.today - 3)
+        end
+        
+        should "return the current duration" do
+          assert_equal @project_duration1, @project.duration_for(Date.today)
+        end
+      end
+    end
+    
   end
   
 end

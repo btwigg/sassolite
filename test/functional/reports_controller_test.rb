@@ -5,7 +5,9 @@ class ReportsControllerTest < ActionController::TestCase
   context "The ReportsController" do
     setup do
       login_user
-      @project_duration = Factory.create(:project_duration)
+      @status_update = Factory.create(:status_update)
+      @project_duration = @status_update.project_duration
+      #@project_duration = Factory.create(:project_duration)
       @project = @project_duration.project
       @project.project_manager = @user
       @project.save
@@ -41,9 +43,26 @@ class ReportsControllerTest < ActionController::TestCase
         assert_select "table#report tbody tr.report-update", 1
       end
       
+      should "display report update" do
+        assert_select "table#report tbody tr.report-update", 1
+      end
+      
+      should "display a status update" do
+        assert_select "td", /Lorem ipsom dolar/
+      end
+      
       should_display_a_headline("Report for #{Date.today.to_s(:long)}")
+    end
+    
+    context "on GET to #index without a status update" do
+      setup do
+        @status_update.destroy
+        get :index
+      end
       
-      
+      should "display a default status update" do
+        assert_select "td", /Status update unavailable./
+      end
     end
     
   end

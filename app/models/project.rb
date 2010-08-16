@@ -26,4 +26,9 @@ class Project < ActiveRecord::Base
       transitions :to => :open, :from => [:retired]
     end
   end
+  
+  def duration_for(date = Date.today)
+    self.project_durations.where(["start <= ? AND end >= ?", date, date]).first ||
+    self.project_durations.where(["end < ?", date]).first
+  end
 end
