@@ -12,6 +12,9 @@ class Project < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true
   
+  scope :open, where(:state => "open")
+  scope :retired, where(:state => "retired")
+  
   state_machine do
     state :open # first one is initial state
     state :retired
