@@ -1,5 +1,5 @@
 # Create an admin user
-User.create(:login => "admin", :password => "password", :password_confirmation => "password")
+User.create(:login => "admin", :password => "password", :password_confirmation => "password", :name => "Admin User", :initials => "AU", :email => "admin@example.com")
 
 ProjectType.create(:name => "Time & Maintenance")
 ProjectType.create(:name => "Not Billable/Internal")
