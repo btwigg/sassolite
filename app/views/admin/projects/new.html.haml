@@ -11,6 +11,11 @@
   = f.text_field :name
   %br
   
+  = f.label :client_id, "Client"
+  %br
+  = f.select :client_id, @clients.map { |m| [m.name, m.id] }
+  %br
+  
   = f.label :project_manager_id, "Project Manager"
   %br
   = f.select :project_manager_id, @project_managers.map { |m| [m.name, m.id] }

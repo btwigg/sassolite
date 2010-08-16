@@ -29,6 +29,7 @@ Factory.define :project do |p|
   p.name "Space Seeding"
   #p.association :project_manager, :factory => :user
   p.association :project_type
+  p.association :client
 end
 
 Factory.define :project_number do |n|

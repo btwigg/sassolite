@@ -50,6 +50,7 @@ class Admin::ProjectsController < ApplicationController
   def load_relational_data
     @project_managers = User.all
     @project_types = ProjectType.all
+    @clients = Client.all
   end
   
 end

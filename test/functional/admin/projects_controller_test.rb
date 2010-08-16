@@ -44,6 +44,10 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         assert_select "p", /Duration: 04\/01\/2012 - 05\/01\/2012/
       end
       
+      should "select a client" do
+        assert_select "p", /Client: Quentin Corp/
+      end
+      
     end
     
     context "on GET to #new" do
@@ -62,6 +66,11 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       
       should assign_to(:project_managers)
       should assign_to(:project_types)
+      should assign_to(:clients)
+      
+      should "select a client" do
+        assert_select "label", /Client/
+      end
       
       should "select a project manager" do
         assert_select "label", /Project Manager/
@@ -94,6 +103,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         
         should assign_to(:project_managers)
         should assign_to(:project_types)
+        should assign_to(:clients)
   
         should_display_an_error_message
       end
@@ -116,6 +126,11 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       
       should assign_to(:project_managers)
       should assign_to(:project_types)
+      should assign_to(:clients)
+      
+      should "select a client" do
+        assert_select "label", /Client/
+      end
       
       should "select a project manager" do
         assert_select "label", /Project Manager/
@@ -150,6 +165,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         
         should assign_to(:project_managers)
         should assign_to(:project_types)
+        should assign_to(:clients)
 
         should_display_an_error_message
       end
