@@ -51,6 +51,10 @@ class ReportsControllerTest < ActionController::TestCase
         assert_select "td", /Lorem ipsom dolar/
       end
       
+      should "display a calendar form" do
+        assert_select "form input.datefield"
+      end
+      
       should_display_a_headline("Report for #{Date.today.to_s(:long)}")
     end
     
