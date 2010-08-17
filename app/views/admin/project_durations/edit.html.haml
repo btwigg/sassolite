@@ -1,0 +1,39 @@
+:javascript
+  jQuery(document).ready(function() {
+    jQuery(".datepicker").datepicker();
+  });
+
+#breadcrumb
+  = link_to "Back", admin_project_project_durations_path(@project, @project_duration)
+
+%h2== Edit #{@project_duration.name}
+
+= form_for :project_duration, :url => admin_project_project_durations_path(@project) do |f|
+  = f.error_messages
+  
+  = f.label :start
+  %br
+  = f.text_field :start, :class => 'datepicker'
+  %br
+  
+  = f.label :end
+  %br
+  = f.text_field :end, :class => 'datepicker'
+  %br
+  
+  = f.label :notes
+  %br
+  = f.text_area :notes
+  %br
+  
+  = f.label :hours_allocated
+  %br
+  = f.text_field :hours_allocated
+  %br
+  
+  = f.label :hours_elapsed
+  %br
+  = f.text_field :hours_elapsed
+  %br
+      
+  = f.submit

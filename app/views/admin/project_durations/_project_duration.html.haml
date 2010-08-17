@@ -1,0 +1,11 @@
+.project_duration.boxy
+  .actions
+    = link_to "Edit", edit_admin_project_project_duration_path(@project, project_duration)
+    = link_to "Destroy", admin_project_project_duration_path(@project, project_duration), :method => :delete, :confirm => "Are sure you want to destroy this duration?  This action cannot be undone."
+    
+  %h3== #{project_duration.start} to #{project_duration.end} 
+  
+  %p== Project: #{@project.name}
+  
+  %p== Project Code: #{@project.code}
+  

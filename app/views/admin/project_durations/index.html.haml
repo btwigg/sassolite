@@ -1,0 +1,8 @@
+#breadcrumb
+  = link_to "Back", admin_projects_path
+
+%h2== #{@project.name} Durations
+
+= link_to "New Duration", new_admin_project_project_duration_path
+
+= render @project_durations
