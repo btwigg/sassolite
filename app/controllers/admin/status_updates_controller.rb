@@ -25,9 +25,10 @@ class Admin::StatusUpdatesController < ApplicationController
       flash[:error] = "Cannot update project with a current duration."
       redirect_to admin_projects_path
     else
-      
+      # Find the current status update
       @status_update = @project_duration.status_updates.where(:entry_date => Date.today).first
       
+      # If it doesn't exist, create it
       if @status_update.nil?
         @status_update = @project_duration.status_updates.create(:entry_date => Date.today, :user => current_user, :description => "New Entry.")
       end
