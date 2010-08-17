@@ -21,7 +21,6 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
         
         context "where a status update exists" do
           setup do
-            #@status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
             generate_status_update
             get :edit, :project_id => @project
           end
@@ -69,7 +68,28 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
       
       context "where a status update exists and is locked" do
         setup do
+          generate_status_update
+          @status_update.lock!
+        end
+        
+        context "by a user other than the current user" do
+          setup do
+            get :edit, :project_id => @project
+          end
+        
+          should set_the_flash.to "Cannot edit status for project 'Space Seeding'.  The update is locked by 'Quentin User'."
+          should redirect_to("admin project path") { admin_projects_path }
+        end
+        
+        context "by the current user" do
+          setup do
+            @status_update.user = @user
+            @status_update.save
+            get :edit, :project_id => @project
+          end
           
+          should render_template :edit
+          should respond_with :success
         end
       end
       
@@ -87,8 +107,9 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
     
     context "on PUT to #update" do
       setup do
-        #@status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
         generate_status_update
+        @status_update.user = @user
+        @status_update.save
         @status_update.lock!
       end
       

@@ -13,7 +13,7 @@ class StatusUpdate < ActiveRecord::Base
     state :locked
 
     event :lock do
-      transitions :to => :locked, :from => [:open]
+      transitions :to => :locked, :from => [:open, :locked]
     end
     event :reopen do
       transitions :to => :open, :from => [:locked]

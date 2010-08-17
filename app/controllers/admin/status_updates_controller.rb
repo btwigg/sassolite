@@ -1,5 +1,6 @@
 class Admin::StatusUpdatesController < ApplicationController
   before_filter :load_relational_data
+  before_filter :verify_lock
   
   def edit
     @status_update.user = current_user
@@ -18,6 +19,13 @@ class Admin::StatusUpdatesController < ApplicationController
   end
   
   protected
+  
+  def verify_lock
+    if @status_update.locked? && current_user != @status_update.user
+      flash[:error] = "Cannot edit status for project '#{@project.name}'.  The update is locked by '#{@status_update.user.name}'."
+      redirect_to admin_projects_path
+    end
+  end
   
   def load_relational_data
     @project = Project.find(params[:project_id])
