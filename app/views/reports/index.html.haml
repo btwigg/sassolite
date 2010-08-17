@@ -1,4 +1,13 @@
+:javascript
+  $(document).ready(function(){
+    $('.datefield').datepicker({ "dateFormat": 'MM d, yy' });
+  });
+
 %h2== Report for #{@date.to_s(:long)}
+
+- form_tag reports_path, :method => :get do
+  = text_field_tag "date", @date.to_s(:long), :class => "datefield"
+  = submit_tag "Submit Date"
 
 %table#report
   %thead
