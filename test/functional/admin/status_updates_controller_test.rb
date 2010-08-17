@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class Admin::StatusUpdatesControllerTest < ActionController::TestCase
+  
+  def generate_status_update
+    @status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
+  end
+  
   context "An Admin::StatusUpdatesController" do
     setup do
       login_user
@@ -16,7 +21,8 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
         
         context "where a status update exists" do
           setup do
-            @status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
+            #@status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
+            generate_status_update
             get :edit, :project_id => @project
           end
 
@@ -61,6 +67,12 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
         
       end
       
+      context "where a status update exists and is locked" do
+        setup do
+          
+        end
+      end
+      
       context "where a current duration doesn't exist" do
         setup do
           @project_duration.destroy
@@ -75,7 +87,8 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
     
     context "on PUT to #update" do
       setup do
-        @status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
+        #@status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
+        generate_status_update
         @status_update.lock!
       end
       
