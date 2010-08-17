@@ -57,7 +57,7 @@ end
 
 def should_display_a_headline(headline)
   should "display '#{headline}' headline" do
-    assert_select "h2", /#{headline}/
+    assert_select "h2", /#{eval('"' + headline + '"')}/
   end
 end
 

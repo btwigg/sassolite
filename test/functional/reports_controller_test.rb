@@ -65,6 +65,30 @@ class ReportsControllerTest < ActionController::TestCase
       end
     end
     
+    context "on GET to #index with a future date" do
+      setup do
+        @future_date = Date.parse("2012-12-21")
+        get :index, :date => @future_date.to_s(:db)
+      end
+      
+      should_display_a_headline "Report for December 21, 2012"
+      
+      should "assign date to future date" do
+        assert_equal @future_date, assigns(:date)
+      end
+    end
+    
+    context "on GET to #index with a past date where no durations or updates exist" do
+      setup do
+        @past_date = Date.parse("1919-12-21")
+        get :index, :date => @past_date.to_s(:db)
+      end
+      
+      should "not find any projects" do
+        assert_equal [], assigns(:projects)
+      end
+    end
+    
   end
 
 end
