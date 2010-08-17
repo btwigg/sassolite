@@ -4,52 +4,71 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   context "An Admin::ProjectsController" do
     setup do
       login_user
+      
       @project = Factory.create(:project, :project_manager => @user)
-      @project.project_durations.create(:start => "04/01/2012", :end => "05/01/2012")
+      @project_duration = @project.project_durations.create(:start => Date.today- 1.week, :end => Date.today + 1.week)
       Factory.create(:project_number)
     end
     
     context "on GET to #index" do
-      setup do
-        get :index
+      context "with a status update" do
+        setup do
+          @status_update = @project_duration.status_updates.create(:user => @user, :description => "lorem", :entry_date => Date.today)
+          get :index
+        end
+      
+        should respond_with :success
+        should assign_to :projects
+        should render_template :index
+      
+        should_display_a_headline "Projects"
+      
+        should "display projects" do
+          assert_select "div.project"
+        end
+      
+        should "display link to new project" do
+          assert_select "a", /New Project/
+        end
+      
+        should "display name of project code" do
+          assert_select "p", /Project Code: 1701/
+        end
+      
+        should "display name of project manager" do
+          assert_select "p", /Project Manager: Sample User/
+        end
+      
+        should "display project type " do
+          assert_select "p", /Project Type: Time &amp; Maintenance/
+        end
+      
+        should "current duration" do
+          assert_select "p", /Current Duration: #{(Date.today- 1.week).strftime("%m/%d/%Y")} - #{(Date.today + 1.week).strftime("%m/%d/%Y")}/
+        end
+      
+        should "select a client" do
+          assert_select "p", /Client: Quentin Corp/
+        end
+      
+        should "display edit durations link" do
+          assert_select "a", /Edit Durations/
+        end
+      
+        should "display who created the last status update and when" do
+          assert_select "p", /Status Last Updated By Sample User on #{Date.today.strftime("%m/%d/%Y")}./
+        end
+        
       end
       
-      should respond_with :success
-      should assign_to :projects
-      should render_template :index
-      
-      should_display_a_headline "Projects"
-      
-      should "display projects" do
-        assert_select "div.project"
-      end
-      
-      should "display link to new project" do
-        assert_select "a", /New Project/
-      end
-      
-      should "display name of project code" do
-        assert_select "p", /Project Code: 1701/
-      end
-      
-      should "display name of project manager" do
-        assert_select "p", /Project Manager: Sample User/
-      end
-      
-      should "display project type " do
-        assert_select "p", /Project Type: Time &amp; Maintenance/
-      end
-      
-      should "current duration" do
-        assert_select "p", /Duration: 04\/01\/2012 - 05\/01\/2012/
-      end
-      
-      should "select a client" do
-        assert_select "p", /Client: Quentin Corp/
-      end
-      
-      should "display edit durations link" do
-        assert_select "a", /Edit Durations/
+      context "without a status update" do
+        setup do
+          get :index
+        end
+        
+        should "display message the project has no status updates." do
+          assert_select "p", /No Status Updates for this Project./
+        end
       end
       
     end
