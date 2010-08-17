@@ -1,4 +1,4 @@
-class ProjectDuration < ActiveRecord::Base    
+class ProjectDuration < ActiveRecord::Base
   default_scope :order => 'end DESC'
   
   belongs_to :project
@@ -11,6 +11,10 @@ class ProjectDuration < ActiveRecord::Base
   
   scope :past, where(["end < ?", Date.today])
   scope :current, where(["start <= ? AND end >= ?", Date.today, Date.today])
+  
+  def name
+    "duration starting #{self.start.strftime('%m/%d/%Y')} and ending #{self.end.strftime('%m/%d/%Y')}"
+  end
   
   def update_for(date = Date.today)
     self.status_updates.where(:entry_date => date).first || self.status_updates.where(["entry_date < ?", date]).first
