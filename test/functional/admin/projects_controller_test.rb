@@ -59,6 +59,10 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
           assert_select "p", /Status Last Updated By Sample User on #{Date.today.strftime("%m/%d/%Y")}./
         end
         
+        should "display a link to update the project's status" do
+          assert_select "a", /Update Status/
+        end
+        
       end
       
       context "without a status update" do

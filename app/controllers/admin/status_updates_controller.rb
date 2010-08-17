@@ -10,7 +10,7 @@ class Admin::StatusUpdatesController < ApplicationController
   def update
     @status_update.reopen!
     if @status_update.update_attributes(params[:status_update])
-      flash[:error] = "Updated status for Project '#{@project.name}'."
+      flash[:notice] = "Updated status for Project '#{@project.name}'."
       redirect_to admin_projects_path
     else
       flash[:error] = "Could not update status for Project '#{@project.name}'."

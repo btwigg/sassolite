@@ -3,6 +3,7 @@
     = link_to "Edit", edit_admin_project_path(project)
     = link_to "Destroy", admin_project_path(project), :method => :delete, :confirm => "Are sure you want to destroy this project?  This action cannot be undone."
     = link_to "Edit Durations", admin_project_project_durations_path(project)
+    = link_to "Update Status", edit_admin_project_status_update_path(project)
   
   %h3= project.name
   
