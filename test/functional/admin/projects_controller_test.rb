@@ -48,6 +48,10 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         assert_select "p", /Client: Quentin Corp/
       end
       
+      should "display edit durations link" do
+        assert_select "a", /Edit Durations/
+      end
+      
     end
     
     context "on GET to #new" do
