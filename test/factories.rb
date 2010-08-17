@@ -56,7 +56,6 @@ end
 
 Factory.define :status_update do |u|
   u.entry_date { Date.today }
-  #u.association :user
   u.association :project_duration
   u.description "Lorem ipsom dolar"
 end

@@ -2,9 +2,12 @@ class Admin::StatusUpdatesController < ApplicationController
   before_filter :load_relational_data
   
   def edit
+    @status_update.user = current_user
+    @status_update.lock!
   end
   
   def update
+    @status_update.reopen!
     if @status_update.update_attributes(params[:status_update])
       flash[:error] = "Updated status for Project '#{@project.name}'."
       redirect_to admin_projects_path

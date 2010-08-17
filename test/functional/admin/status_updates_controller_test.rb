@@ -7,6 +7,7 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
       
       @project_duration = Factory.create(:project_duration)
       @project = @project_duration.project
+      @quentin = Factory.create(:user, :login => "quentin",  :initials => "QU", :name => "Quentin User", :email => "quentin.user@example.com", :password => "sadfasdfasdf", :password_confirmation => "sadfasdfasdf" )
     end
     
     context "on GET to #edit" do
@@ -15,7 +16,7 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
         
         context "where a status update exists" do
           setup do
-            @status_update = @project_duration.status_updates.create(:user => @user, :entry_date => Date.today, :description => "lorem ipson dolar")
+            @status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
             get :edit, :project_id => @project
           end
 
@@ -24,6 +25,14 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
           should assign_to(:status_update)
           should_display_a_form
           should_display_a_headline "Status Update for #{Date.today.to_s(:long)}"
+          
+          should "set the user to the current user" do
+            assert_equal @user, assigns(:status_update).user
+          end
+          
+          should "set the status of the update to locked" do
+            assert assigns(:status_update).locked?
+          end
         end
 
         context "where a status update doesn't exist" do
@@ -65,6 +74,10 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
     end
     
     context "on PUT to #update" do
+      setup do
+        @status_update = @project_duration.status_updates.create(:user => @quentin, :entry_date => Date.today, :description => "lorem ipson dolar")
+        @status_update.lock!
+      end
       
       context "with valid data" do
         setup do
@@ -73,6 +86,10 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
         
         should set_the_flash.to "Updated status for Project 'Space Seeding'."
         should redirect_to("admin projects path") { admin_projects_path }
+        
+        should "set the status of the update to open" do
+          assert assigns(:status_update).open?
+        end
       end
       
       context "with invalid data" do
