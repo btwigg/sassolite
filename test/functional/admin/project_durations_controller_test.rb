@@ -153,7 +153,17 @@ class Admin::ProjectDurationsControllerTest < ActionController::TestCase
       end
       
       context "with invalid data" do
+        setup do
+          # End date is before start date.
+          put :update, :project_id => @project, :id => @project_duration, :project_duration => {
+            :start => Date.today,
+            :end => Date.today - 2.weeks
+          }
+        end
         
+        should assign_to :project
+        should respond_with :unprocessable_entity
+        should render_template :edit
       end
       
     end

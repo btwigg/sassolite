@@ -8,7 +8,7 @@
 
 %h2== Edit #{@project_duration.name}
 
-= form_for :project_duration, :url => admin_project_project_durations_path(@project) do |f|
+= form_for :project_duration, :html => {:method => :put}, :url => admin_project_project_duration_path(@project, @project_duration) do |f|
   = f.error_messages
   
   = f.label :start
