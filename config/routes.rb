@@ -6,6 +6,7 @@ Config::Application.routes.draw do
     end
     resources :projects do
       resources :project_durations
+      resource :status_update
     end
     resources :users
   end

@@ -1,0 +1,14 @@
+#breadcrumb
+  = link_to "Back", admin_projects_path
+
+%h2== Status Update for #{@status_update.entry_date.to_s(:long)}
+
+= form_for :status_update, :html => {:method => :put}, :url => admin_project_status_update_path(@project) do |f|
+  = f.error_messages
+  
+  = f.label :description
+  %br
+  = f.text_area :description
+  %br
+      
+  = f.submit

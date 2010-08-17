@@ -38,5 +38,7 @@ module Config
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    ActiveSupport::Deprecation.silenced = true
   end
 end
