@@ -12,6 +12,10 @@ class Project < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true
   
+  scope :open_on, lambda { |date| 
+    joins(:project_durations).
+    where(["project_durations.start <= ? AND project_durations.end >= ?", date, date])
+  }
   scope :open, where(:state => "open")
   scope :retired, where(:state => "retired")
   
