@@ -65,6 +65,20 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
         
       end
       
+      context "with a locked status update" do
+        setup do
+          @status_update = @project_duration.status_updates.create(:user => @user, :description => "lorem", :entry_date => Date.today)
+          @status_update.lock!
+          get :index
+        end
+        
+        should respond_with :success
+        should "display a link to unlock the project's status" do
+          assert_select "a", /Unlock Status/
+        end
+        
+      end
+      
       context "without a status update" do
         setup do
           get :index

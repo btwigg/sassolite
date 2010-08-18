@@ -1,3 +1,5 @@
+- current_duration = project.project_durations.current.last
+- last_update = current_duration.status_updates.last if current_duration
 .project.boxy
   .actions
     = link_to "Edit", edit_admin_project_path(project)
@@ -15,7 +17,7 @@
 
   %p== Project Manager: #{project.project_manager.name}
   
-  - if current_duration = project.project_durations.current.last
+  - if current_duration
     %p== Current Duration: #{current_duration.start.strftime("%m/%d/%Y")} - #{current_duration.end.strftime("%m/%d/%Y")}
   - else
     %p Current Duration: n/a
