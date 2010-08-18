@@ -1,6 +1,6 @@
 class Admin::StatusUpdatesController < ApplicationController
   before_filter :load_relational_data
-  before_filter :verify_lock
+  before_filter :verify_lock, :except => :unlock
   
   def edit
     @status_update.user = current_user
@@ -16,6 +16,12 @@ class Admin::StatusUpdatesController < ApplicationController
       flash[:error] = "Could not update status for Project '#{@project.name}'."
       render :edit, :status => :unprocessable_entity
     end
+  end
+  
+  def unlock
+    @status_update.reopen!
+    flash[:notice] = "Status update for project '#{@project.name}' has been unlocked."
+    redirect_to edit_admin_project_status_update_path(@project)
   end
   
   protected

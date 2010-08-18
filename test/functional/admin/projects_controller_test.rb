@@ -3,6 +3,7 @@ require 'test_helper'
 class Admin::ProjectsControllerTest < ActionController::TestCase
   context "An Admin::ProjectsController" do
     setup do
+      create_quentin_user # create before login to avoid session issue
       login_user
       
       @project = Factory.create(:project, :project_manager => @user)
@@ -66,17 +67,32 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       end
       
       context "with a locked status update" do
-        setup do
-          @status_update = @project_duration.status_updates.create(:user => @user, :description => "lorem", :entry_date => Date.today)
-          @status_update.lock!
-          get :index
+        context "that belongs to the current user" do
+          setup do
+            @status_update = @project_duration.status_updates.create(:user => @user, :description => "lorem", :entry_date => Date.today)
+            @status_update.lock!
+            get :index
+          end
+        
+          should respond_with :success
+          should "display a link to update the project's status" do
+            assert_select "a", /Update Status/
+          end
+          
         end
         
-        should respond_with :success
-        should "display a link to unlock the project's status" do
-          assert_select "a", /Unlock Status/
-        end
+        context "that belongs to someone other than the current user" do
+          setup do
+            @status_update = @project_duration.status_updates.create(:user => @quentin, :description => "lorem", :entry_date => Date.today)
+            @status_update.lock!
+            get :index
+          end
         
+          should respond_with :success
+          should "display a link to unlock the project's status" do
+            assert_select "a", /Unlock Status/
+          end
+        end
       end
       
       context "without a status update" do

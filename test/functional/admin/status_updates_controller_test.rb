@@ -7,12 +7,12 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
   end
   
   context "An Admin::StatusUpdatesController" do
-    setup do
+    setup do      
+      create_quentin_user # create quentin before logging in to avoid session issue
       login_user
       
       @project_duration = Factory.create(:project_duration)
       @project = @project_duration.project
-      @quentin = Factory.create(:user, :login => "quentin",  :initials => "QU", :name => "Quentin User", :email => "quentin.user@example.com", :password => "sadfasdfasdf", :password_confirmation => "sadfasdfasdf" )
     end
     
     context "on GET to #edit" do
@@ -140,5 +140,36 @@ class Admin::StatusUpdatesControllerTest < ActionController::TestCase
       
     end
     
+    context "on POST to #unlock" do
+      context "where a status update exists and is locked" do
+        setup do
+          generate_status_update
+          @status_update.lock!
+          post :unlock, :project_id => @project
+        end
+
+        should set_the_flash.to("Status update for project 'Space Seeding' has been unlocked.")
+        should redirect_to("admin projects path") { edit_admin_project_status_update_path(@project) }
+        should "unlock the status update" do
+          assert assigns(:status_update).open?
+        end
+
+      end
+
+      context "where a status update exists and is not locked" do
+        setup do
+          generate_status_update
+          post :unlock, :project_id => @project
+        end
+
+        should set_the_flash.to("Status update for project 'Space Seeding' has been unlocked.")
+        should redirect_to("admin projects path") { edit_admin_project_status_update_path(@project) }
+        should "unlock the status update" do
+          assert assigns(:status_update).open?
+        end
+      end
+    end
+    
   end
+  
 end

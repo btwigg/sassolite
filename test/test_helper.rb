@@ -32,6 +32,11 @@ def login_user
   @user = Factory.create(:user)  
 end
 
+def create_quentin_user
+  @quentin = Factory.create(:user, :login => "quentin",  :initials => "QU", :name => "Quentin User", :email => "quentin.user@example.com", :password => "sadfasdfasdf", :password_confirmation => "sadfasdfasdf" )
+  UserSession.find.destroy
+end
+
 # Shoulda macros
 def should_redirect_home
   should redirect_to("home") { new_user_session_path }

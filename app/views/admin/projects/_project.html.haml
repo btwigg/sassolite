@@ -5,7 +5,10 @@
     = link_to "Edit", edit_admin_project_path(project)
     = link_to "Destroy", admin_project_path(project), :method => :delete, :confirm => "Are sure you want to destroy this project?  This action cannot be undone."
     = link_to "Edit Durations", admin_project_project_durations_path(project)
-    = link_to "Update Status", edit_admin_project_status_update_path(project)
+    - if last_update && last_update.locked? && last_update.user != current_user
+      = link_to "Unlock Status", unlock_admin_project_status_update_path(project), :method => :post, :confirm => "Are you sure you want to unlock the status?  You may erase the work created by #{last_update.user}."
+    - else
+      = link_to "Update Status", edit_admin_project_status_update_path(project)
   
   %h3= project.name
   
@@ -21,7 +24,7 @@
     %p== Current Duration: #{current_duration.start.strftime("%m/%d/%Y")} - #{current_duration.end.strftime("%m/%d/%Y")}
   - else
     %p Current Duration: n/a
-  - if current_duration = project.project_durations.current.last && last_update = current_duration.status_updates.last
+  - if current_duration && last_update
     %p== Status Last Updated By #{last_update.user.name} on #{last_update.entry_date.strftime("%m/%d/%Y")}.
   - else
     %p No Status Updates for this Project.

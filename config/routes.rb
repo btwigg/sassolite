@@ -6,7 +6,11 @@ Config::Application.routes.draw do
     end
     resources :projects do
       resources :project_durations
-      resource :status_update
+      resource :status_update do
+        member do
+          post :unlock
+        end
+      end
     end
     resources :users
   end
